@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.panshi.mapper.MarketingMapper">
+
+    <insert id="questionnaireAdd" parameterType="com.panshi.domain.QuaysQuestionnaire">
+        insert into qasys_core.qasys_questionnaire_t
+            (project_name, integral)
+        value
+            (#{projectName},#{integral})
+    </insert>
+    
+    <select id="questionnaireQuery" resultType="com.panshi.domain.QuaysQuestionnaire" parameterType="java.lang.Long">
+        select id, project_name, integral, time from qasys_core.qasys_questionnaire_t where id = #{0}
+    </select>
+
+    <insert id="questionnaireContentAdd" parameterType="com.panshi.domain.QuestionnaireContent">
+        insert into qasys_core.qasys_qdetail_t
+            (project_id, num, question)
+        value
+            (#{projectId},#{num},#{question})
+    </insert>
+
+    <select id="contentQueryAll" resultType="com.panshi.domain.QuestionnaireContent" parameterType="java.lang.Long">
+        select id, project_id, num, question from qasys_core.qasys_qdetail_t where project_id = #{0}
+    </select>
+
+    <select id="contentQuery" resultType="com.panshi.domain.QuestionnaireContent" parameterType="java.lang.String">
+        select id, project_id, num, question from qasys_core.qasys_qdetail_t where question = #{question}
+    </select>
+
+</mapper>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/parent/app-api/app-api.iml" filepath="$PROJECT_DIR$/parent/app-api/app-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/parent/marketing/marketing.iml" filepath="$PROJECT_DIR$/parent/marketing/marketing.iml" />
+      <module fileurl="file://$PROJECT_DIR$/parent/member/member.iml" filepath="$PROJECT_DIR$/parent/member/member.iml" />
+      <module fileurl="file://$PROJECT_DIR$/parent/parent.iml" filepath="$PROJECT_DIR$/parent/parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/parent/questions_and_answers/questions_and_answers.iml" filepath="$PROJECT_DIR$/parent/questions_and_answers/questions_and_answers.iml" />
+      <module fileurl="file://$PROJECT_DIR$/parent/sdk_all/sdk_all.iml" filepath="$PROJECT_DIR$/parent/sdk_all/sdk_all.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: dubboDemo
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/qasys_context?serverTimezone=UTC
+    username: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: ps123456
+    type: com.alibaba.druid.pool.DruidDataSource
+  redis:
+    host: localhost
+    port: 6379
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/test
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: foo
+
+mybatis:
+  #mapper.xml文件
+  mapper-locations: /mapper/**/*.xml
+
+dubbo:
+  scan:
+    base-packages: com.panshi.service.impl
+  protocol:
+    name: dubbo
+    port: 8071
+  registry:
+    address: zookeeper://192.168.3.76:2181/dlamgroup
+    #group: /dlamgroup
+  consumer:
+    check: false
+
+
+server:
+  port: 8077
+
+zookeeperHostPort: 192.168.3.76:2181/locks
+nodeLock: /integralLock
+

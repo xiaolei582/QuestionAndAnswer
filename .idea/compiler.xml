@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="app-api" />
+        <module name="marketing" />
+        <module name="member" />
+        <module name="sdk_all" />
+        <module name="questions_and_answers" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="app-api" target="1.8" />
+      <module name="marketing" target="1.8" />
+      <module name="member" target="1.8" />
+      <module name="parent" target="1.8" />
+      <module name="questions_and_answers" target="1.8" />
+      <module name="sdk_all" target="1.8" />
+      <module name="Test" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Test" options="-parameters" />
+      <module name="app-api" options="-parameters" />
+      <module name="marketing" options="-parameters" />
+      <module name="member" options="-parameters" />
+      <module name="questions_and_answers" options="-parameters" />
+      <module name="sdk_all" options="-parameters" />
+    </option>
+  </component>
+</project>

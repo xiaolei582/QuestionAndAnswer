@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: questions_and_answers
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/qasys_context?serverTimezone=UTC
+    username: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: ps123456
+    type: com.alibaba.druid.pool.DruidDataSource
+  data:
+    solr:
+      host: http://localhost:8983/solr/test
+
+mybatis:
+  #mapper.xml文件
+  mapper-locations: /mapper/**/*.xml
+
+dubbo:
+  scan:
+    base-packages: com.panshi.service.impl
+  protocol:
+    name: dubbo
+    port: 8045
+  registry:
+    address: zookeeper://192.168.3.76:2181/dlamgroup
+    #group: /dlamgroup
+  consumer:
+    check: false
+
+server:
+  port: 8058

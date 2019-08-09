@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.panshi.mapper.QuestionMapper">
+
+    <select id="questionQueryAll" resultMap="questionQueryMap">
+        select
+               question_id, mid, question, integral, time, id, username
+        from
+             qasys_context.qasys_question_t qqt
+        left join
+             qasys_context.qasys_member_t qmt on qmt.id = qqt.mid
+    </select>
+
+    <resultMap id="questionQueryMap" type="com.panshi.domain.QuaysQuestion">
+        <id column="question_id" property="questionId"></id>
+        <result column="mid" property="mid"></result>
+        <result column="question" property="question"></result>
+        <result column="integral" property="integral"></result>
+        <collection property="quaysMember" ofType="com.panshi.domain.QuaysMember">
+            <id column="id" property="id"></id>
+            <result column="username" property="username"></result>
+        </collection>
+    </resultMap>
+
+    <select id="questionQuery" resultMap="questionMap" parameterType="java.lang.String">
+        select
+            question_id, mid, question, integral, time, id, username
+        from
+             qasys_context.qasys_question_t qqt
+        left join
+             qasys_context.qasys_member_t qmt on qmt.id = qqt.mid
+        <where>
+            qqt.question = #{0}
+        </where>
+    </select>
+
+    <resultMap id="questionMap" type="com.panshi.domain.QuaysQuestion">
+        <id column="question_id" property="questionId"></id>
+        <result column="mid" property="mid"></result>
+        <result column="question" property="question"></result>
+        <result column="integral" property="integral"></result>
+        <collection property="quaysMember" ofType="com.panshi.domain.QuaysMember">
+            <id column="id" property="id"></id>
+            <result column="username" property="username"></result>
+        </collection>
+    </resultMap>
+
+
+    <insert id="postQuestions" parameterType="com.panshi.domain.QuaysQuestion">
+        insert into qasys_context.qasys_question_t
+             (mid, question, integral)
+        VALUE
+            (#{mid},#{question},#{integral});
+    </insert>
+
+    <insert id="answer" parameterType="com.panshi.domain.QuaysAnswer">
+        insert into qasys_context.qasys_answer_t
+            (mid, qid, answer)
+        VALUE
+            (#{mid},#{qid},#{answer});
+    </insert>
+
+    <select id="questionIdQuery" resultType="com.panshi.domain.QuaysQuestion" parameterType="java.lang.Long">
+        select
+            question_id, mid, question, integral, time
+        from
+            qasys_context.qasys_question_t
+        <where>
+            question_id = #{0}
+        </where>
+    </select>
+
+    <select id="answerQuery" resultType="com.panshi.domain.QuaysAnswer" parameterType="java.lang.Long">
+        select
+            id, mid, qid, answer, time, type
+        from
+            qasys_context.qasys_answer_t
+        <where>
+            qid = #{0}
+        </where>
+    </select>
+
+    <select id="answerIdQuery" resultType="com.panshi.domain.QuaysAnswer" parameterType="java.lang.Long">
+        select
+            id, mid, qid, answer, time, type
+        from
+            qasys_context.qasys_answer_t
+        <where>
+            id = #{0}
+        </where>
+    </select>
+
+    <update id="adoption" parameterType="com.panshi.domain.QuaysAnswer">
+        update qasys_context.qasys_answer_t set type = #{type} where id = #{id}
+    </update>
+
+    <select id="answerTypeQuery" resultType="com.panshi.domain.QuaysAnswer" parameterType="java.lang.Long">
+        select
+            id, mid, qid, answer, time, type
+        from
+            qasys_context.qasys_answer_t
+        where qid =#{0} and type = 2
+    </select>
+
+    <insert id="integralFlow" parameterType="com.panshi.domain.QuaysIntegral">
+        insert into qasys_context.qasys_integral_t (mid, integral, state) value (#{mid},#{integral},#{state})
+    </insert>
+</mapper>

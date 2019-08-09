@@ -1,0 +1,25 @@
+server:
+  port: 8088
+
+dubbo:
+  registry:
+    address: zookeeper://192.168.3.76:2181/dlamgroup
+    #group: /dlamgroup
+  #关闭对服务端的监测
+  consumer:
+    check: false
+
+inviteIntegral: 30
+
+spring:
+  application:
+    name: dubboDemo
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/qasys_context?serverTimezone=UTC
+    username: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: ps123456
+    type: com.alibaba.druid.pool.DruidDataSource
+  kafka:
+    bootstrap-servers: localhost:9092
+

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.panshi.mapper.MemberMapper">
+    <!-- 会员增加 -->
+    <insert id="add" parameterType="com.panshi.domain.QuaysMember">
+        insert into qasys_context.qasys_member_t (username, password) value (#{username},#{password})
+    </insert>
+    
+    <select id="usernameQuery" resultType="com.panshi.domain.QuaysMember" parameterType="java.lang.String">
+        select
+            id, username, password, user_integral
+        from
+            qasys_context.qasys_member_t
+        where username = #{0}
+    </select>
+
+    <select id="userIdQuery" resultType="com.panshi.domain.QuaysMember" parameterType="java.lang.Long">
+        select
+            id, username, password, user_integral userIntegral
+        from
+            qasys_context.qasys_member_t
+        where id = #{0}
+    </select>
+
+    <select id="integralQuery" resultMap="integralMap" parameterType="java.lang.String">
+        select
+               id, username, user_integral, integral_id, mid, integral, time, state
+        from
+             qasys_context.qasys_member_t qmt
+        left join
+             qasys_context.qasys_integral_t qit
+        on qmt.id = qit.mid
+        <where>
+            qmt.id = #{0}
+        </where>
+    </select>
+    
+    <resultMap id="integralMap" type="com.panshi.domain.QuaysMember">
+        <id column="id" property="id"></id>
+        <result column="username" property="username"></result>
+        <result column="user_integral" property="userIntegral"></result>
+        <collection property="quaysIntegral" ofType="com.panshi.domain.QuaysIntegral">
+            <id column="integral_id" property="integralId"></id>
+            <result column="mid" property="mid"></result>
+            <result column="time" property="time"></result>
+            <result column="state" property="state"></result>
+        </collection>
+    </resultMap>
+
+    <update id="subtract" parameterType="com.panshi.domain.QuaysQuestion">
+        update
+            qasys_context.qasys_member_t
+        set
+            user_integral = user_integral - #{integral}
+        <where>
+            id = #{mid}
+        </where>
+    </update>
+
+    <update id="plus" parameterType="com.panshi.domain.QuaysQuestion">
+        update
+            qasys_context.qasys_member_t
+        set
+            user_integral = user_integral + #{integral}
+        <where>
+            id = #{mid}
+        </where>
+    </update>
+
+    <select id="ranking" resultType="com.panshi.domain.QuaysMember">
+        select
+            id, username, password, user_integral userIntegral
+        from
+            qasys_context.qasys_member_t
+        order by user_integral desc limit 0,10
+    </select>
+</mapper>

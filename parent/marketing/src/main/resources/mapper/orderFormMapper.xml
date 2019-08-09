@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.panshi.mapper.OrderFormMapper">
+    <select id="userIdAndCommodityIdOrderFormQuery" parameterType="java.lang.Long"
+            resultType="com.panshi.domain.OrderForm">
+        select
+            orderform_id orderformId,
+            commodity_id commodityId,
+            user_id userId,
+            time
+        from
+            qasys_context.order_form_t
+        where
+            user_id = #{userId} and commodity_id =#{commodityId}
+    </select>
+
+    <insert id="insert" parameterType="java.lang.Long">
+        insert into qasys_context.order_form_t (commodity_id, user_id)
+        values (#{commodityId},#{userId});
+    </insert>
+
+</mapper>
